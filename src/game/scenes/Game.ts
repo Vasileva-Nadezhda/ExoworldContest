@@ -62,7 +62,7 @@ export class Game extends BaseScene {
             this.time.removeAllEvents();
             let text = this.add.text(0, 0,
                 'Game Over!',
-                { fontFamily: 'customFont', fontSize: `50px`, color: '#999' });
+                { fontFamily: 'customFont', fontSize: `40px`, color: '#999' });
             text.x = BaseScene.areaCenterX - text.width / 2;
             text.y = BaseScene.areaHeight - 100 * BaseScene.ratio;
         }
@@ -71,7 +71,8 @@ export class Game extends BaseScene {
     private increaseBallsCount(ability: boolean) {
         console.log('ssafas');
         let ball;
-        for (let i = 0; i < ((!ability) ? 1 : Math.min(this.maxBallsCount - this.balls.getLength() + 1, this.maxBallsCount)); ++i) {
+        let toAdd = ((!ability) ? 1 : this.maxBallsCount - this.balls.getLength());
+        for (let i = 0; i < toAdd; ++i) {
             ball = this.physics.add.sprite(((ability) ? this.platform.x : BaseScene.areaCenterX), ((ability) ? this.platform.y - 10: BaseScene.areaCenterY), 'ball');
             this.balls.add(ball);
             ball.setVelocity(((ability) ? (Math.random() - 0.5) * 100 : 0), ((ability) ? -200 * BaseScene.ratio : 200 * BaseScene.ratio));
@@ -91,7 +92,7 @@ export class Game extends BaseScene {
         const ability = abilityBody as Ability;
         switch (ability.getAbilityType()) {
             case 'platformEnlarger':
-                if (this.secondsEnlarged === 0)
+                if (!this.platform.getIsEnlarged())
                     this.platform.playAnimation();
                 this.secondsEnlarged += 15;
             break;
@@ -110,8 +111,8 @@ export class Game extends BaseScene {
         if (this.secondsEnlarged === 1) {
             this.platform.playAnimation();
             this.secondsEnlarged--;
-        }     
-        else if (this.platform.getIsEnlarged())
+        }
+        else if (this.secondsEnlarged > 0)
             this.secondsEnlarged--;
         if (this.secondsScoreMultiplier > 0) {
             this.secondsEnlarged--;

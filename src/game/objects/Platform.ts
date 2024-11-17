@@ -2,7 +2,7 @@ import { BaseScene } from '../scenes/BaseScene'
 
 export class Platform extends Phaser.Physics.Arcade.Sprite {
 
-    private static ballBounceRate = 5;
+    private static ballBounceRate = 30;
     private static lagging = 10;
 
     private isEnlarged = false;
