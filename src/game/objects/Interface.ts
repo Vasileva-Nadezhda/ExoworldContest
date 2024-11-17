@@ -40,7 +40,7 @@ export class Interface {
         this.scoreText.x = BaseScene.areaCenterX - this.scoreText.width / 2;
         this.scoreText.y = 35 * BaseScene.ratio;
         this.timeText = scene.add.text(0, 0,
-            'Time: 03:00',
+            'Time: 01:00',
             { fontFamily: 'customFont', fontSize: `20px`, color: '#999' });
         this.timeText.x = BaseScene.areaCenterX - this.timeText.width / 2;
         this.timeText.y = 50 * BaseScene.ratio;
